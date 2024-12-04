@@ -44,6 +44,3 @@ OpenAI Whisper supports a wide range of audio formats, thanks to FFmpeg integrat
 ## Usage
 ```bash
 python transcribe_audio.py
-
-
-
