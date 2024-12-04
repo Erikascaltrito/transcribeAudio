@@ -1,44 +1,43 @@
 import whisper
 import os
 import time
+import shutil
+import sys
 
-def transcribe(file_path, output_file="transcription.txt"):
+def check_ffmpeg():
+    """
+    Check if FFmpeg is installed and available in the PATH.
+    """
+    if shutil.which("ffmpeg") is None:
+        print("Error: FFmpeg is not installed or not available in PATH.")
+        print("Please install FFmpeg to handle audio formats correctly.")
+        sys.exit(1)
+
+def transcribe(file_path, output_file="transcription.txt", model_name="base"):
     """
     Transcribes an audio file into text using OpenAI's Whisper model.
-
-    Args:
-        file_path (str): Path to the input audio file.
-        output_file (str): Path to the output text file where transcription will be saved.
-
-    Returns:
-        None
     """
-    # Load the Whisper model (use "base" for a balanced trade-off between speed and accuracy)
-    model = whisper.load_model("base") 
-    
-    # Remove the existing output file if it exists
+
+    model = whisper.load_model(model_name)
     if os.path.exists(output_file):
         os.remove(output_file)
 
-    # Open the output file in append mode to write the transcription
     with open(output_file, "a") as f:
-        print("Start transcription...")
-        start_time = time.time()  # Record the start time
-
-        # Transcribe the audio file
+        print(f"Start transcription using the '{model_name}' model...")
+        start_time = time.time()
         result = model.transcribe(file_path, task="transcribe")
-        
-        # Write each segment of transcription to the output file
         for segment in result["segments"]:
             text = segment["text"]
             f.write(text + "\n")
 
-        # Print the completion message and total time taken
         print("Transcription completed.")
         print(f"Total time required: {(time.time() - start_time) / 60:.2f} minutes")
 
-# Specify the path to the audio file
+# Ensure FFmpeg is installed
+check_ffmpeg()
+
+# Path to the audio file
 file_path = "path_to_your_audio_file/audio_file.m4a"
 
-# Call the transcribe function
+# Transcribe the audio
 transcribe(file_path)
