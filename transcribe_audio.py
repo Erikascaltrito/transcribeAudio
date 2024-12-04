@@ -14,7 +14,7 @@ def transcribe(file_path, output_file="transcription.txt"):
         None
     """
     # Load the Whisper model (use "base" for a balanced trade-off between speed and accuracy)
-    model = whisper.load_model("base")
+    model = whisper.load_model("base") 
     
     # Remove the existing output file if it exists
     if os.path.exists(output_file):
@@ -32,7 +32,6 @@ def transcribe(file_path, output_file="transcription.txt"):
         for segment in result["segments"]:
             text = segment["text"]
             f.write(text + "\n")
-            print(f"Segment transcribed: {text}")
 
         # Print the completion message and total time taken
         print("Transcription completed.")
