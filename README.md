@@ -34,13 +34,16 @@ OpenAI Whisper supports a wide range of audio formats, thanks to FFmpeg integrat
     1.    Download FFmpeg from the official website https://ffmpeg.org/download.html.
     2.    Extract the downloaded file.
     3.    Add the bin folder from the extracted directory to your system’s PATH:
-        •    Open Control Panel > System > Advanced System Settings.
-        •    Click on Environment Variables.
-        •    Edit the Path variable and add the path to the bin folder.
+        - Open Control Panel > System > Advanced System Settings.
+        - Click on Environment Variables.
+        - Edit the Path variable and add the path to the bin folder.
 4. Run the script with an audio file as input.
+
+(If you see some warnings when you run it, don't worry the tool will work anyway)
 
 ## Usage
 ```bash
 python transcribe_audio.py
+
 
 
